@@ -1,20 +1,51 @@
+ const main = document.getElementById('main');
+ const li = document.getElementsByTagName('li');
+ const big_container = document.getElementById('big_conteiner')
+
 import data from './data.js'
-import { create_card } from './function.js'
+import {edit_data, create_card,create_click_event,create_click_event_with_category } from './function.js'
+import {add_product} from './add.js'
+
+
+
+
+const add = document.getElementById('add_product')
+add.addEventListener('click',()=>{
+   add_product()
+})
+
+let home = document.getElementById('home')
+home.addEventListener('click',()=>{
+   location.reload()
+})
+
 
 const cards = document.getElementsByClassName('cards')
 
-const main = document.getElementById('main');
 
 const all_products = document.getElementById('All Products');
 const Men = document.getElementById('Men');
 const Women = document.getElementById('Women');
 const Jewelery = document.getElementById('Jewelery');
 const Electronics = document.getElementById('Electronics');
-const li = document.getElementsByTagName('li')
+const search = document.getElementById('search')
+let search_input = document.getElementById('search_input')
+
+search.addEventListener('click',()=>{
+   main.innerHTML = ''
+   for (const l of li) {
+      l.style.backgroundColor = '#FFBF9B'
+   }
+   for(let obj of copiedData){
+   if (obj.title.includes(search_input.value || obj.category.includes(search_input.value))){
+      create_card(obj);
+   }}
+
+})
 
 
 
-for (const obj of data) {
+for (const obj of edit_data) {
    create_card(obj)
 
 }
@@ -22,81 +53,19 @@ for (const obj of data) {
 all_products.style.backgroundColor = '#ffdecb'
 
 
+create_click_event(all_products)
 
-all_products.addEventListener('click', () => {
-   main.innerHTML = ''
-   for (const l of li) {
-      l.style.backgroundColor = '#FFBF9B'
-   }
-      all_products.style.backgroundColor = '#ffdecb'
-      for (const obj of data) {
-         create_card(obj);
-      }
+create_click_event_with_category(Men,"men's clothing")
 
-})
+create_click_event_with_category(Women,"women's clothing")
+
+create_click_event_with_category(Jewelery,"jewelery")
+
+create_click_event_with_category(Electronics,"electronics")
 
 
-Men.addEventListener('click', () => {
-   for (const l of li) {
-      l.style.backgroundColor = '#FFBF9B'
-   }
-   Men.style.backgroundColor = '#ffdecb'
-   main.innerHTML = ''
- 
-   for (const obj of data) {
-      if (obj.category === "men's clothing") {
-         create_card(obj);
-      }
-
-   }
-})
 
 
-Women.addEventListener('click', () => {
-   for (const l of li) {
-      l.style.backgroundColor = '#FFBF9B'
-   }
-   Women.style.backgroundColor = '#ffdecb'
-   main.innerHTML = ''
- 
-   for (const obj of data) {
-      if (obj.category === "women's clothing") {
-         create_card(obj);
-      }
-
-   }
-})
-
-Jewelery.addEventListener('click', () => {
-   for (const l of li) {
-      l.style.backgroundColor = '#FFBF9B'
-   }
-   Jewelery.style.backgroundColor = '#ffdecb'
-   main.innerHTML = ''
- 
-   for (const obj of data) {
-      if (obj.category === "jewelery") {
-         create_card(obj);
-      }
-
-   }
-})
-
-
-Electronics.addEventListener('click', () => {
-   for (const l of li) {
-      l.style.backgroundColor = '#FFBF9B'
-   }
-   Electronics.style.backgroundColor = '#ffdecb'
-   main.innerHTML = ''
- 
-   for (const obj of data) {
-      if (obj.category === "electronics") {
-         create_card(obj);
-      }
-
-   }
-})
 
 
 
