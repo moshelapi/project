@@ -67,7 +67,7 @@ export function create_click_event(a) {
         main.innerHTML = ''
         color_button()
         a.style.backgroundColor = '#ffdecb'
-        for (const obj of copiedData) {
+        for (const obj of edit_data) {
             create_card(obj);
         }
 
@@ -80,7 +80,7 @@ export function create_click_event_with_category(a, category) {
         main.innerHTML = ''
         color_button()
         a.style.backgroundColor = '#ffdecb'
-        for (const obj of copiedData) {
+        for (const obj of edit_data) {
             if (obj.category === category) {
                 create_card(obj);
             }
