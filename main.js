@@ -31,15 +31,26 @@ const Electronics = document.getElementById('Electronics');
 const search = document.getElementById('search')
 let search_input = document.getElementById('search_input')
 
+let counter = 0 
+
 search.addEventListener('click',()=>{
    main.innerHTML = ''
    for (const l of li) {
       l.style.backgroundColor = '#FFBF9B'
    }
-   for(let obj of copiedData){
+   for(let obj of edit_data){
    if (obj.title.includes(search_input.value || obj.category.includes(search_input.value))){
       create_card(obj);
-   }}
+      counter ++
+   }
+}
+if (counter === 0){
+   const h1 = document.createElement('h1');
+   h1.textContent = 'No products found...'
+   h1.id = 'not_data'
+   main.append(h1)
+}
+counter = 0
 
 })
 
