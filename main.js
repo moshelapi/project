@@ -2,11 +2,12 @@
  const li = document.getElementsByTagName('li');
  const big_container = document.getElementById('big_conteiner')
 
-import data from './data.js'
-import {edit_data, create_card,create_click_event,create_click_event_with_category } from './function.js'
+
+import {fetchData, create_card,create_click_event,create_click_event_with_category } from './function.js'
 import {add_product} from './add.js'
 
-
+export const edit_data = await fetchData()
+  
 
 
 const add = document.getElementById('add_product')
@@ -70,7 +71,7 @@ create_click_event_with_category(Men,"men's clothing")
 
 create_click_event_with_category(Women,"women's clothing")
 
-create_click_event_with_category(Jewelery,"jewelery")
+create_click_event_with_category(Jewelery,"jewelry")
 
 create_click_event_with_category(Electronics,"electronics")
 

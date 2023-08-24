@@ -1,11 +1,24 @@
-import data from './data.js'
-// import { main,li } from './main.js'; 
 
 const main = document.getElementById('main');
 const li = document.getElementsByTagName('li');
 
- export const edit_data = [...data]
+export const edit_data = await fetchData()
 
+export async function fetchData() {
+    try {
+      const response = await fetch('http://localhost:3020/api/product/');
+  
+      if (!response.ok) {
+        throw new Error('Error in server data');
+      }
+  
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Fetch error:', error);
+      throw error;
+    }
+  }
 
 
 function color_button() {
@@ -33,8 +46,21 @@ export function create_card(obj) {
 
     delete_card.addEventListener('click',(e)=>{
         e.stopPropagation()
-        card.remove()
+fetch(`http://localhost:3020/api/product/${obj.id}`, {
+  method: 'DELETE',
+})
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Error in deleting data');
+    }
+    console.log('Data deleted successfully');
+  })
+  .catch(error => {
+    console.error('Fetch error:', error);
+  });
+  card.remove()
     })
+    
 
     top_card.id = 'top_card'
     product_ditels.id = 'card_bottom'

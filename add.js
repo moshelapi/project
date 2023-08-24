@@ -1,8 +1,8 @@
 
-import { create_card } from './function.js'
-import data from './data.js'
+import { create_card,fetchData } from './function.js'
 
-let id = data.length
+
+export const edit_data = await fetchData()
 
 export function add_product() {
     const add_page = document.createElement('div')
@@ -38,8 +38,6 @@ export function add_product() {
 
 function add_input(add_page, button_add) {
 
-    // const mmm = document.getElementById('button_add')
-
     const card_add = document.createElement('div')
     card_add.id = 'card_add'
 
@@ -74,23 +72,36 @@ function add_input(add_page, button_add) {
     const input_description = document.createElement('input');
     input_description.placeholder = 'insert description'
 
-    const new_card = {
-        id: id + 1,
-        title: input_title.value,
-        price: Number(input_price.value),
-        description: input_description.value,
-        category: input_category.value,
-        Image: input_img.value,
-
-    }
-
+    const new_obj = {};
 
     button_add.addEventListener('click', () => {
-        create_card(new_card)
+        new_obj.id = edit_data[edit_data.length - 1].id + 1;
+        new_obj.title = input_title.value;
+        new_obj.price = Number(input_price.value);
+        new_obj.description = input_description.value;
+        new_obj.category = input_category.value;
+        new_obj.image = input_img.value;
+        fetch('http://localhost:3020/api/product', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(new_obj),
+          })
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Error in posting data to server');
+              }
+              return response.json();
+            })
+            .then(data => {
+              console.log('Data posted successfully:', data);
+            })
+            .catch(error => {
+              console.error('Fetch error:', error);
+            });
     })
 
-
-    id++
     card_add.append(title, input_title, category, input_category, price, input_price, img, input_img, quantity, input_quantity, description, input_description)
     add_page.append(card_add)
 }
