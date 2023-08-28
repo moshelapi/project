@@ -312,20 +312,31 @@ function edit(obj, product_edit, button) {
 
     card_edit.append(title, input_title, category, input_category, price, input_price, img, input_img, quantity, input_quantity, description, input_description)
     product_edit.append(card_edit)
-    
-    
-    button.addEventListener('click', () => {input_title.value
-        console.log(edit_data[obj.id-1].title );
-        console.log(input_title.value);
 
-        input_title.value==undefined?console.log('undefine'): edit_data[obj.id-1].title = input_title.value;
-        // edit_data[obj.id-1].category = input_category.value
-        // edit_data[obj.id-1].price = input_price.value
-        // edit_data[obj.id-1].image = input_img.value
-        // edit_data[obj.id-1].description = input_description.value
-        // edit_data[obj.id-1].quantity = input_quantity.value
-
-
+    button.addEventListener('click', () => {
+        const new_obj = {
+            title: input_title.value,
+            category: input_category.value,
+            price: parseFloat(input_price.value),
+            image: input_img.value,
+            description: input_description.value,
+            quantity: parseInt(input_quantity.value)
+        };
+        fetch(`https://stor-7r28.onrender.com/api/product/${obj.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(new_obj)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Updated object:', data);
+        })
+        .catch(error => {
+            console.error('Error updating object:', error);
+        });
+        location.reload()
     })
 
 }

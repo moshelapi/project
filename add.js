@@ -100,6 +100,7 @@ function add_input(add_page, button_add) {
             .catch(error => {
               console.error('Fetch error:', error);
             });
+            location.reload()
     })
 
     card_add.append(title, input_title, category, input_category, price, input_price, img, input_img, quantity, input_quantity, description, input_description)
