@@ -6,7 +6,7 @@ export const edit_data = await fetchData()
 
 export async function fetchData() {
     try {
-      const response = await fetch('http://localhost:3020/api/product/');
+      const response = await fetch('https://stor-7r28.onrender.com/api/product');
   
       if (!response.ok) {
         throw new Error('Error in server data');
