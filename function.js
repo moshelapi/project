@@ -201,8 +201,7 @@ function create_card_product(obj) {
     title_Quantity.textContent = 'Quantity'
 
     const text_Quantity = document.createElement('p')
-    const random = Math.floor(Math.random() * 100);
-    text_Quantity.textContent = random
+    text_Quantity.textContent = obj.quantity
 
 
     card_right.append(title, text_title, title_description, text_description, title_category, text_category, title_price, text_price, title_Quantity, text_Quantity)
@@ -301,7 +300,7 @@ function edit(obj, product_edit, button) {
     const quantity = document.createElement('label');
     quantity.textContent = 'Quantity'
     const input_quantity = document.createElement('input');
-    input_quantity.placeholder = Math.floor(Math.random() * 100);
+    input_quantity.placeholder = obj.quantity
 
     const description = document.createElement('label');
     description.textContent = 'Description'
