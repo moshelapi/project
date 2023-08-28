@@ -81,7 +81,7 @@ function add_input(add_page, button_add) {
         new_obj.description = input_description.value;
         new_obj.category = input_category.value;
         new_obj.image = input_img.value;
-        fetch('http://localhost:3020/api/product', {
+        fetch('https://stor-7r28.onrender.com/api/product', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

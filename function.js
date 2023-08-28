@@ -46,7 +46,7 @@ export function create_card(obj) {
 
     delete_card.addEventListener('click',(e)=>{
         e.stopPropagation()
-fetch(`http://localhost:3020/api/product/${obj.id}`, {
+fetch(`https://stor-7r28.onrender.com/api/product${obj.id}`, {
   method: 'DELETE',
 })
   .then(response => {
